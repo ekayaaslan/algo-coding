@@ -44,6 +44,8 @@ Q1S3. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 ```cpp
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
+  // Override is intentional. This way idx keeps
+  // the latest index that contains the number.
   idx[nums[i]] = i;
 }
 ```
@@ -52,10 +54,7 @@ for (int i=0; i<n; i++) {
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
   if (idx.contains(cnum)) {
-    // Avoid to return {i,i} which can happen if nums[i] is
-    // the exact half of target. Because idx of the exact half
-    // keeps the last index, it still can find two indices that
-    // contains the exact half if there are such two indices.
+    // Ensure the complement is not the element itself.
     if (idx[cnum] != i) {
       return {i, idx[cnum]};
     }
@@ -82,16 +81,19 @@ if (target%2 == 0) {
 ```cpp
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
+  // Override is not strictly necessary. Idx may actually
+  // hold any index of the number.
   idx[nums[i]] = i;
 }
 ```
 
 ```cpp
 for (int i=0; i<n; i++) {
-  // Do not check when nums[i] is the exact half as this
-  // case is already handled. It does not need to check when
-  // nums[i] is smaller than the half as such a pair will be
-  // checked anyways for its (larger than the half) complement.
+  // Do not check when nums[i] is the exact half to ensure
+  // it does not return the same element in the pair and note this
+  // case is already handled above. Additionally, it does not need
+  // to check when nums[i] is smaller than the half as the matching
+  // pair would already be checked on its complement.
   if (nums[i] > target/2) {
     int cnum = target-nums[i];
     if (idx.contains(cnum)) {
@@ -107,14 +109,14 @@ Q1S5. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
-  // The map at the moment contains only numbers that
+  // The map at this moment contains only numbers that
   // are iterated over so far. The search hence does not
   // miss any pair that may sum to target.
   if (idx.contains(cnum)) {
     return {i, idx[cnum]};
   }
-  // Should be added after the check to avoid returning
-  // {i, i} when nums[i] is the exact half.
+  // Insert the current number *after* the check. This guarantees
+  // it does not pair a number with itself.
   idx[nums[i]] = i;
 }
 ```
@@ -122,6 +124,8 @@ for (int i=0; i<n; i++) {
 Q1S6. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 
 ```cpp
+// Pair numbers with indices to keep the original indices
+// after sorting.
 struct item {
   int num;
   int idx;
