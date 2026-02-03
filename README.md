@@ -25,6 +25,7 @@ if (target%2 == 0) {
   if (ids.size() > 1) {
     return {idv[0], idv[1]};
   }
+  // Erase target/2 to avoid returning its index, below.
   idx.erase(target/2);
 }
 ```
@@ -50,8 +51,14 @@ for (int i=0; i<n; i++) {
 ```cpp
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
-  if (idx.contains(cnum) && idx[cnum] != i) {
-    return {i, idx[cnum]};
+  if (idx.contains(cnum)) {
+    // Avoid to return {i,i} which can happen if nums[i] is
+    // the exact half of target. Because idx of the exact half
+    // keeps the last index, it still can find two indices that
+    // contains the exact half if there are such two indices.
+    if (idx[cnum] != i) {
+      return {i, idx[cnum]};
+    }
   }
 }
 ```
@@ -59,14 +66,14 @@ for (int i=0; i<n; i++) {
 Q1S4. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 
 ```cpp
-int idx = -1;
+int index = -1;
 if (target%2 == 0) {
   for (int i=0; i<n; i++) {
     if (nums[i] == target/2) {
-      if (idx != -1) {
-        return {idx, i};
+      if (index != -1) {
+        return {index, i};
       }
-      idx = i;
+      index = i;
     }
   }
 }
@@ -81,6 +88,10 @@ for (int i=0; i<n; i++) {
 
 ```cpp
 for (int i=0; i<n; i++) {
+  // Do not check when nums[i] is the exact half as this
+  // case is already handled. It does not need to check when
+  // nums[i] is smaller than the half as such a pair will be
+  // checked anyways for its (larger than the half) complement.
   if (nums[i] > target/2) {
     int cnum = target-nums[i];
     if (idx.contains(cnum)) {
@@ -96,9 +107,14 @@ Q1S5. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
+  // The map at the moment contains only numbers that
+  // are iterated over so far. The search hence does not
+  // miss any pair that may sum to target.
   if (idx.contains(cnum)) {
     return {i, idx[cnum]};
   }
+  // Should be added after the check to avoid returning
+  // {i, i} when nums[i] is the exact half.
   idx[nums[i]] = i;
 }
 ```
