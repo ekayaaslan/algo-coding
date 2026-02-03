@@ -22,7 +22,7 @@ for (int i=0; i<n; i++) {
 ```cpp
 if (target%2 == 0) {
   auto& idv = idx[target/2];
-  if (ids.size() > 1) {
+  if (idv.size() > 1) {
     return {idv[0], idv[1]};
   }
   // Erase target/2 to avoid returning its index, below.
