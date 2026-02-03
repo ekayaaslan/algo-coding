@@ -121,8 +121,8 @@ for (int i=0; i<n; i++) {
     return {i, idx[cnum]};
   }
   // Insert the current number *after* the
-  // check. This guarantees it does not pair a
-  // number with itself.
+  // check. This guarantees it does not pair
+  // a number with itself.
   idx[nums[i]] = i;
 }
 ```
