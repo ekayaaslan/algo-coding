@@ -55,8 +55,8 @@ for (int i=0; i<n; i++) {
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
   if (idx.contains(cnum)) {
-    // Ensure the complement is not the
-    // element itself.
+    // Ensure the complement is not the element
+    // itself.
     if (idx[cnum] != i) {
       return {i, idx[cnum]};
     }
