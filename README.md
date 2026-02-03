@@ -146,7 +146,9 @@ pair<bool,int> search(vector<item>& items, int lo, int hi, int target) {
 L1S6. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
-// L1S5. Part I to III. {}
+// L1S5. Part I. {}
+// L1S5. Part II. {}
+// L1S5. Part III. {}
 ```
 
 ```cpp
