@@ -25,8 +25,8 @@ if (target%2 == 0) {
   if (idv.size() > 1) {
     return {idv[0], idv[1]};
   }
-  // Erase target/2 to avoid returning its index
-  // in the linear seach below.
+  // Erase target/2 to avoid returning its
+  // index in the linear seach below.
   idx.erase(target/2);
 }
 ```
@@ -45,8 +45,8 @@ Q1S3. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 ```cpp
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
-  // Override is intentional. This way idx keeps
-  // the latest index that contains the number.
+  // Override is intentional. This way idx
+  // keeps the latest index of the number.
   idx[nums[i]] = i;
 }
 ```
@@ -55,7 +55,8 @@ for (int i=0; i<n; i++) {
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
   if (idx.contains(cnum)) {
-    // Ensure the complement is not the element itself.
+    // Ensure the complement is not the
+    // element itself.
     if (idx[cnum] != i) {
       return {i, idx[cnum]};
     }
@@ -82,20 +83,21 @@ if (target%2 == 0) {
 ```cpp
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
-  // Override is not strictly necessary. Idx may
-  // actually hold any index of the number.
+  // Override is not strictly necessary. Idx
+  // may actually hold any index of the number.
   idx[nums[i]] = i;
 }
 ```
 
 ```cpp
 for (int i=0; i<n; i++) {
-  // Do not check when nums[i] is the exact half to
-  // ensure it does not return the same element in the
-  // pair and note this case is already handled above.
-  // Additionally, it does not need to check when
-  // nums[i] is smaller than the half as the matching
-  // pair would already be checked on its complement.
+  // Do not check when nums[i] is the exact
+  // half to ensure it does not return the
+  // same element in the pair and note this
+  // case is already handled above. Also, it
+  // does not need to check when nums[i] is
+  // smaller than the half as the matching
+  // pair will be checked on its complement.
   if (nums[i] > target/2) {
     int cnum = target-nums[i];
     if (idx.contains(cnum)) {
@@ -111,14 +113,16 @@ Q1S5. [Two Sum.](https://leetcode.com/problems/two-sum) (LeetCode 1.)
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
-  // The map at this moment contains only numbers that
-  // are iterated over so far. The search hence does
-  // not miss any pair that may sum to target.
+  // The map at this moment contains only
+  // numbers that are iterated over so far.
+  // The search hence does not miss any pair
+  // that may sum to target.
   if (idx.contains(cnum)) {
     return {i, idx[cnum]};
   }
-  // Insert the current number *after* the check. This
-  // guarantees it does not pair a number with itself.
+  // Insert the current number *after* the
+  // check. This guarantees it does not pair a
+  // number with itself.
   idx[nums[i]] = i;
 }
 ```
@@ -143,7 +147,8 @@ sort(items.begin(), items.end(),
 ```cpp
 for (int i=0; i<n-1; i++) {
   int cnum = target-items[i].num;
-  auto [found, idx] = search(items, i+1, n-1, cnum);
+  auto [found, idx] =
+    search(items, i+1, n-1, cnum);
   if (found) {
     return {items[i].idx, idx};
   }
@@ -152,7 +157,8 @@ for (int i=0; i<n-1; i++) {
 
 ```cpp
 pair<bool,int> search(
-    vector<item>& items, int lo, int hi, int target) {
+    vector<item>& items,
+    int lo, int hi, int target) {
   while (lo < hi) {
     int mid = (lo+hi)/2;
     int num = items[mid].num;
