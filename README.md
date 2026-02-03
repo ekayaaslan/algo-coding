@@ -59,6 +59,40 @@ for (int i=0; i<n; i++) {
 L1S4. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
+int idx = -1;
+if (target%2 == 0) {
+  for (int i=0; i<n; i++) {
+    if (nums[i] == target/2) {
+      if (idx != -1) {
+        return {idx, i};
+      }
+      idx = i;
+    }
+  }
+}
+```
+
+```cpp
+unordered_map<int,int> idx;
+for (int i=0; i<n; i++) {
+  idx[nums[i]] = i;
+}
+```
+
+```cpp
+for (int i=0; i<n; i++) {
+  if (nums[i] > target/2) {
+    int cnum = target-nums[i];
+    if (idx.contains(cnum)) {
+      return {i, idx[cnum]};
+    }
+  }
+}
+```
+
+L1S5. [Two Sum.](https://leetcode.com/problems/two-sum)
+
+```cpp
 unordered_map<int,int> idx;
 for (int i=0; i<n; i++) {
   int cnum = target-nums[i];
@@ -69,7 +103,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S5. [Two Sum.](https://leetcode.com/problems/two-sum)
+L1S6. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 struct item {
@@ -114,7 +148,7 @@ pair<bool,int> search(vector<item>& items, int lo, int hi, int target) {
 }
 ```
 
-L1S6. [Two Sum.](https://leetcode.com/problems/two-sum)
+L1S7. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 struct item {
