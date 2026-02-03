@@ -1,4 +1,4 @@
-L1S1. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S1. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 for (int i=0; i<n; i++) {
@@ -10,7 +10,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S2. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S2. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 unordered_map<int,vector<int>> idx;
@@ -38,7 +38,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S3. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S3. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 unordered_map<int,int> idx;
@@ -56,7 +56,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S4. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S4. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 int idx = -1;
@@ -90,7 +90,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S5. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S5. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 unordered_map<int,int> idx;
@@ -103,7 +103,7 @@ for (int i=0; i<n; i++) {
 }
 ```
 
-L1S6. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S6. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 struct item {
@@ -148,7 +148,7 @@ pair<bool,int> search(vector<item>& items, int lo, int hi, int target) {
 }
 ```
 
-L1S7. [Two Sum.](https://leetcode.com/problems/two-sum)
+Q1S7. [Two Sum.](https://leetcode.com/problems/two-sum)
 
 ```cpp
 struct item {
