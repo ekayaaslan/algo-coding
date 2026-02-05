@@ -209,4 +209,49 @@ while (i < j) {
 }
 ```
 
+Q2S1. [Add Two Numbers](https://leetcode.com/problems/add-two-numbers) (LeetCode 2.)
+
+```cpp
+// The first node does not contain any digits of the sum,
+// instead it is there for convenience, so that, digits
+// of the sum always created on out->next.
+ListNode* out = new ListNode();
+// Store the first node separately, because out will change
+// during the iterations that compute the digits of the sum.
+ListNode* res = out;
+bool carry = false;
+```
+
+```cpp
+// Invariant is:
+//   carry: does the sum carry one from the previous iteration. 
+//   l1, l2: points to digits to sum in this iteration.
+//   out: points to digit of the sum on the previous iteration.  
+while (l1 || l2) {
+  int sum = carry;
+  if (l1) { sum += l1->val; }
+  if (l2) { sum += l2->val; }
+  out->next = new ListNode(sum%10);
+  carry = (sum > 9);
+  if (l1) { l1 = l1->next;}
+  if (l2) { l2 = l2->next;}
+  out = out->next;
+}
+```
+
+```cpp
+// In case there is still a carry one after the iterations, it
+// becomes a new most-significant digit by itself.
+if (carry) {
+  out->next = new ListNode(1);
+}
+```
+
+```cpp
+// Return the next, instead of res, because the first node is
+// intentionally blank one and the digits start from the next.
+return res->next;
+```
+
+
 
