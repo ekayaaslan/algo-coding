@@ -221,7 +221,7 @@ while (l1 || l2) {
   if (l1) { sum += l1->val; }
   if (l2) { sum += l2->val; }
   out->next = new ListNode(sum%10);
-  
+  // Prepare for the next iteration.
   carry = (sum > 9);
   if (l1) { l1 = l1->next;}
   if (l2) { l2 = l2->next;}
