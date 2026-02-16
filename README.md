@@ -344,6 +344,8 @@ for (int i=0; i<n; i++) {
 Q3S5. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
 
 ```cpp
+// The iteration starts on [0,1) which assumes there
+// is s[0] element. Hence edge-case for when s is empty.
 if (s.empty()) { 
   return 0;
 }
@@ -381,6 +383,8 @@ longest = max(longest, n-i);
 Q3S6. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
 
 ```cpp
+// The iteration starts on [0,1) which assumes there
+// is s[0] element. Hence edge-case for when s is empty.
 if (s.empty()) { 
   return 0;
 }
