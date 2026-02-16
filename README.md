@@ -284,6 +284,8 @@ bool has_duplicates(string& s, int lo, int hi) {
 ```cpp
 int longest = 0;
 for (int i=0; i<n; i++) {
+  // Start j on i+longest so that the length may actually
+  // update the longest.
   for (int j=i+longest; j<n; j++) {
     if (!has_duplicates(s, i, j)) {
       longest = max(longest, j-i+1);
@@ -310,6 +312,8 @@ bool has_duplicates(string& s, int lo, int hi) {
 ```cpp
 int longest = 0;
 for (int i=0; i<n; i++) {
+  // It is guaranteed to have duplicates after K chars,
+  // because there are at most K different chars.
   for (int j=i+longest; j<min(n,i+K); j++) {
     if (!has_duplicates(s, i, j)) {
       longest = max(longest, j-i+1);
@@ -325,7 +329,9 @@ static constexpr int K = 128;
 int longest = 0;
 for (int i=0; i<n; i++) {
   vector<bool> seen(K);
-  for (int j=i; j<n; j++) { 
+  // Each iteration checks for [i,j] interval,
+  // and updates seen and longest for [i,j].
+  for (int j=i; j<n; j++) {
     if (seen[s[j]]) {
       break;
     }
@@ -338,8 +344,8 @@ for (int i=0; i<n; i++) {
 Q3S5. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
 
 ```cpp
-if (s.size() < 2) { 
-  return s.size(); 
+if (s.empty()) { 
+  return 0;
 }
 ```
 
@@ -353,6 +359,9 @@ count[s[0]] ++;
 
 ```cpp
 int longest = 0;
+// At the beginning of each iteration, the invariant is
+// the interval [i,j) has no duplicates. Update longest
+// for [i,j) and slide the window.
 while (j < n) {
   longest = max(longest, j-i);
   if (count[s[j]] > 0) {
@@ -363,14 +372,17 @@ while (j < n) {
   count[s[j]] ++;
   j ++;
 }
-longest = max(longest, j-i);
+```
+```cpp
+// Updates longest for [i,n) which has no duplicates.
+longest = max(longest, n-i);
 ```
 
 Q3S6. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
 
 ```cpp
-if (s.size() < 2) { 
-  return s.size(); 
+if (s.empty()) { 
+  return 0;
 }
 ```
 
@@ -384,13 +396,21 @@ last[s[0]] = 0;
 
 ```cpp
 int longest = 0;
+// At the beginning of each iteration, the invariant is
+// the interval [i,j) has no duplicates. Update the longest
+// for [i,j) and move j forward by one.
 while (j < n) {
   longest = max(longest, j-i);
   if (last[s[j]] >= i) {
+    // last[s[j]]+1 is the left-most index of a substring
+    // that does not contain s[j].
     i = last[s[j]]+1;
   }
   last[s[j]] = j;
   j ++;
 }
-longest = max(longest, j-i);
+```
+```cpp
+// Updates longest for [i,n) which has no duplicates.
+longest = max(longest, n-i);
 ```
