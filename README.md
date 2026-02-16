@@ -317,3 +317,80 @@ for (int i=0; i<n; i++) {
   }
 }
 ```
+
+Q3S4. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
+
+```cpp
+static constexpr int K = 128;
+int longest = 0;
+for (int i=0; i<n; i++) {
+  vector<bool> seen(K);
+  for (int j=i; j<n; j++) { 
+    if (seen[s[j]]) {
+      break;
+    }
+    seen[s[j]] = true;
+    longest = max(longest, j-i+1);
+  }
+}
+```
+
+Q3S5. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
+
+```cpp
+if (s.size() < 2) { 
+  return s.size(); 
+}
+```
+
+```cpp
+static constexpr int K = 128;
+vector<int> count(K);
+int i = 0;
+int j = 1;
+count[s[0]] ++;
+```
+
+```cpp
+int longest = 0;
+while (j < n) {
+  longest = max(longest, j-i);
+  if (count[s[j]] > 0) {
+      count[s[i]] --;
+      i ++;
+      continue;
+  }
+  count[s[j]] ++;
+  j ++;
+}
+longest = max(longest, j-i);
+```
+
+Q3S6. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
+
+```cpp
+if (s.size() < 2) { 
+  return s.size(); 
+}
+```
+
+```cpp
+static constexpr int K = 128;
+vector<int> last(K, -1);
+int i = 0;
+int j = 1;
+last[s[0]] = 0;
+```
+
+```cpp
+int longest = 0;
+while (j < n) {
+  longest = max(longest, j-i);
+  if (last[s[j]] >= i) {
+    i = last[s[j]]+1;
+  }
+  last[s[j]] = j;
+  j ++;
+}
+longest = max(longest, j-i);
+```
