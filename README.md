@@ -240,5 +240,80 @@ if (carry) {
 return res->next;
 ```
 
+Q3S1. [Add Two Numbers](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
 
+```cpp
+static constexpr int K = 128;
+bool has_duplicates(string& s, int lo, int hi) {
+  vector<bool> seen(K);
+  for (int i=lo; i<=hi; i++) {
+    if (seen[s[i]]) {
+      return true;
+    }
+    seen[s[i]] = true;
+  }
+  return false;
+}
+```
+```cpp
+int longest = 0;
+for (int i=0; i<n; i++) {
+  for (int j=i; j<n; j++) {
+    if (!has_duplicates(s, i, j)) {
+      longest = max(longest, j-i+1);
+    }
+  }
+}
+```
 
+Q3S2. [Add Two Numbers](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
+
+```cpp
+static constexpr int K = 128;
+bool has_duplicates(string& s, int lo, int hi) {
+  vector<bool> seen(K);
+  for (int i=lo; i<=hi; i++) {
+    if (seen[s[i]]) {
+      return true;
+    }
+    seen[s[i]] = true;
+  }
+  return false;
+}
+```
+```cpp
+int longest = 0;
+for (int i=0; i<n; i++) {
+  for (int j=i+longest; j<n; j++) {
+    if (!has_duplicates(s, i, j)) {
+      longest = max(longest, j-i+1);
+    }
+  }
+}
+```
+
+Q3S3. [Add Two Numbers](https://leetcode.com/problems/longest-substring-without-repeating-characters) (LeetCode 3.)
+
+```cpp
+static constexpr int K = 128;
+bool has_duplicates(string& s, int lo, int hi) {
+  vector<bool> seen(K);
+  for (int i=lo; i<=hi; i++) {
+    if (seen[s[i]]) {
+      return true;
+    }
+    seen[s[i]] = true;
+  }
+  return false;
+}
+```
+```cpp
+int longest = 0;
+for (int i=0; i<n; i++) {
+  for (int j=i+longest; j<min(n,i+K); j++) {
+    if (!has_duplicates(s, i, j)) {
+      longest = max(longest, j-i+1);
+    }
+  }
+}
+```
