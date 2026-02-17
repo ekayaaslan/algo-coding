@@ -414,7 +414,26 @@ while (j < n) {
   j ++;
 }
 ```
+
 ```cpp
 // Updates longest for [i,n) which has no duplicates.
 longest = max(longest, n-i);
+```
+
+Q4S1. [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays) (LeetCode 4.)
+
+```cpp
+vector<int> out;
+out.insert(out.end(), nums1.begin(), nums1.end());
+out.insert(out.end(), nums2.begin(), nums2.end());
+```
+
+```cpp
+std::sort(out.begin(), out.end());
+```
+
+```cpp
+int lo = (n+m-1)/2;
+int hi = (n+m)/2;
+return (out[lo]+out[hi])/2.0;
 ```
