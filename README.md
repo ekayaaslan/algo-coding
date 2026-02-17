@@ -437,3 +437,54 @@ int lo = (n+m-1)/2;
 int hi = (n+m)/2;
 return (out[lo]+out[hi])/2.0;
 ```
+
+Q4S2. [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays) (LeetCode 4.)
+
+```cpp
+span span1 = nums1;
+span span2 = nums2;
+int n = nums1.size();
+int m = nums2.size();
+int lo = (n+m-1)/2;
+int hi = (n+m)/2;
+```
+
+```cpp
+int cnt = 0;
+// out[cnt] is min of span1 and span2.
+while (cnt < lo) {
+  pop_min(span1, span2);
+  cnt ++;
+}
+```
+
+```cpp
+  if (lo == hi) {
+    return pop_min(span1, span2);
+  }
+  int numlo = pop_min(span1, span2);
+  int numhi = pop_min(span1, span2);
+  return (numlo + numhi) / 2.0;
+```
+
+```cpp
+int pop(span<int>& nums) {
+  int ret = nums[0];
+  nums = nums.subspan(1);
+  return ret;
+}
+int pop_min(span<int>& nums1, span<int>& nums2) {
+  if (nums1.empty()) {
+    return pop(nums2);
+  }
+  if (nums2.empty()) {
+    return pop(nums1);
+  }
+  if (nums1[0] < nums2[0]) {
+    return pop(nums1);
+  } else {
+    return pop(nums2);
+  }
+  return 0;
+}
+```
