@@ -459,12 +459,12 @@ while (cnt < lo) {
 ```
 
 ```cpp
-  if (lo == hi) {
-    return pop_min(span1, span2);
-  }
-  int numlo = pop_min(span1, span2);
-  int numhi = pop_min(span1, span2);
-  return (numlo + numhi) / 2.0;
+if (lo == hi) {
+  return pop_min(span1, span2);
+}
+int numlo = pop_min(span1, span2);
+int numhi = pop_min(span1, span2);
+return (numlo + numhi) / 2.0;
 ```
 
 ```cpp
